@@ -23,36 +23,40 @@
   list
 
 ##########################################################
-# test add person command, setup state for futuer tests
+# test add person command, setup state for future tests
 ##########################################################
 
   # should catch invalid args format
   add wrong args wrong args
-  add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid, address
-  add Valid Name p/12345 valid@email.butNoPrefix a/valid, address
+  add Valid Name 12345 e/valid@email.butNoPhonePrefix a/123, valid address, #12-345, 123456
+  add Valid Name p/12345 valid@email.butNoPrefix a/123, valid address, #12-345, 123456
   add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address
-  add Valid Name p/12345 e/valid@email.butNoTagPrefix a/valid, address t/goodTag noPrefixTag
+  add Valid Name p/12345 e/valid@email.butNoTagPrefix a/123, valid address, #12-345, 123456 t/goodTag noPrefixTag
   
   # should catch invalid person data
-  add []\[;] p/12345 e/valid@e.mail a/valid, address
-  add Valid Name p/not_numbers e/valid@e.mail a/valid, address
-  add Valid Name p/12345 e/notAnEmail a/valid, address
-  add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag
+  add []\[;] p/12345 e/valid@e.mail a/123, valid address, #12-345, 123456
+  add Valid Name p/not_numbers e/valid@e.mail a/123, valid address, #12-345, 123456
+  add Valid Name p/12345 e/notAnEmail a/123, valid address, #12-345, 123456
+  add Valid Name p/12345 e/valid@email.butInvalidAddress a/asd, #12-345, 123456
+  add Valid Name p/12345 e/valid@email.butInvalidBlock a/asd, Clementi, #12-345, 123456
+  add Valid Name p/12345 e/valid@email.butInvalidUnit a/123, Clementi, asd, 123456
+  add Valid Name p/12345 e/valid@email.butInvalidPostalCode a/123, Clementi, #12-345, asd
+  add Valid Name p/12345 e/valid@e.mail a/123, valid address, #12-345, 123456 t/invalid_-[.tag
 
   # should add correctly and list non private information
-  add Adam Brown p/111111 e/adam@gmail.com a/111, alpha street
+  add Adam Brown p/111111 e/adam@gmail.com a/111, Bukit Batok, #01-02, 133456
   list
-  add Betsy Choo pp/222222 pe/benchoo@nus.edu.sg pa/222, beta street t/secretive
+  add Betsy Choo pp/222222 pe/benchoo@nus.edu.sg pa/222, beta street, #14-234, 678901 t/secretive
   list
-  add Charlie Dickson pp/333333 e/charlie.d@nus.edu.sg a/333, gamma street t/friends t/school
+  add Charlie Dickson pp/333333 e/charlie.d@nus.edu.sg a/333, gamma street, #21-456, 345678 t/friends t/school
   list
-  add Dickson Ee p/444444 pe/dickson@nus.edu.sg a/444, delta street t/friends
+  add Dickson Ee p/444444 pe/dickson@nus.edu.sg a/444, delta street, #17-123, 456789 t/friends
   list
-  add Esther Potato p/555555 e/esther@not.a.real.potato pa/555, epsilon street t/tubers t/starchy
+  add Esther Potato p/555555 e/esther@not.a.real.potato pa/555, epsilon street, #13-890, 234567 t/tubers t/starchy
   list
 
   # should not allow adding duplicate persons
-  add Esther Potato p/555555 e/esther@not.a.real.potato pa/555, epsilon street t/tubers t/starchy
+  add Esther Potato p/555555 e/esther@not.a.real.potato pa/555, epsilon street, #13-890, 234567 t/tubers t/starchy
 
 ##########################################################
 # test view/viewall persons command
