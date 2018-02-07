@@ -12,15 +12,13 @@ public class Block {
     public static final String BLOCK_VALIDATION_REGEX = "\\d+";
 
     public final String value;
-    private boolean isPrivate;
 
     /**
-     * Validates given phone number.
+     * Validates given block number.
      *
      * @throws IllegalValueException if given block string is invalid.
      */
-    public Block(String block, boolean isPrivate) throws IllegalValueException {
-        this.isPrivate = isPrivate;
+    public Block(String block) throws IllegalValueException {
         String trimmedBlock = block.trim();
         if (!isValidBlock(trimmedBlock)) {
             throw new IllegalValueException(MESSAGE_BLOCK_CONSTRAINTS);
@@ -50,9 +48,5 @@ public class Block {
     @Override
     public int hashCode() {
         return value.hashCode();
-    }
-
-    public boolean isPrivate() {
-        return isPrivate;
     }
 }

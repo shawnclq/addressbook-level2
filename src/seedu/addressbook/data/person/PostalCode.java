@@ -12,15 +12,13 @@ public class PostalCode {
     public static final String POSTALCODE_VALIDATION_REGEX = "\\d+";
 
     public final String value;
-    private boolean isPrivate;
 
     /**
-     * Validates given phone number.
+     * Validates given postal code.
      *
      * @throws IllegalValueException if given postal code string is invalid.
      */
-    public PostalCode(String postalCode, boolean isPrivate) throws IllegalValueException {
-        this.isPrivate = isPrivate;
+    public PostalCode(String postalCode) throws IllegalValueException {
         String trimmedPostalCode = postalCode.trim();
         if (!isValidPostalCode(trimmedPostalCode)) {
             throw new IllegalValueException(MESSAGE_POSTALCODE_CONSTRAINTS);
@@ -50,9 +48,5 @@ public class PostalCode {
     @Override
     public int hashCode() {
         return value.hashCode();
-    }
-
-    public boolean isPrivate() {
-        return isPrivate;
     }
 }
