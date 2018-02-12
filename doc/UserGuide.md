@@ -54,17 +54,17 @@ Shows a list of all persons in the address book.<br>
 Format: `list`
 
 ### Finding all persons containing any keyword in their name: `find`
-Finds persons whose names contain any of the given keywords.<br>
+Finds persons whose names contain any of the given keywords or whose non-private phone numbers contains any of the keywords.<br>
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-> The search is case sensitive, the order of the keywords does not matter, only the name is searched, 
+> The order of the keywords does not matter, only the name is searched,
 and persons matching at least one keyword will be returned (i.e. `OR` search).
 
 Examples: 
 * `find John`<br>
-  Returns `John Doe` but not `john`
-* `find Betsy Tim John`<br>
-  Returns Any person having names `Betsy`, `Tim`, or `John`
+  Returns `John Doe` or `john`
+* `find betsy Tim 123`<br>
+  Returns Any person having names `betsy`, `Tim`, or any contact whose non-private phone number contains "123"
 
 ### Deleting a person : `delete`
 Deletes the specified person from the address book. Irreversible.<br>

@@ -56,4 +56,8 @@ public class Phone {
     public boolean isPrivate() {
         return isPrivate;
     }
+
+    public boolean containsSubstring(String substring) {
+        return this.value.indexOf(substring) != -1;
+    }
 }

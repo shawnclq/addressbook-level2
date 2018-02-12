@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import seedu.addressbook.data.person.ReadOnlyPerson;
+import seedu.addressbook.data.person.Phone;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -17,7 +18,8 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords and displays them as a list with index numbers.\n"
+            + "the specified keywords or whose non-private phone number contains any of the (numbered) keywords"
+            + " and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
@@ -52,7 +54,18 @@ public class FindCommand extends Command {
             final Set<String> wordsInName = new HashSet<>(person.getName().getWordsInName());
             if (!Collections.disjoint(wordsInName, keywords)) {
                 matchedPersons.add(person);
+            } else {
+                Phone personsPhone = person.getPhone();
+                for (String substring: keywords) {
+                    if (substring.matches(Phone.PHONE_VALIDATION_REGEX)
+                            && !personsPhone.isPrivate()
+                            && personsPhone.containsSubstring(substring)) {
+                        matchedPersons.add(person);
+                        break;
+                    }
+                }
             }
+
         }
         return matchedPersons;
     }
